@@ -14,16 +14,6 @@ export class AppComponent {
 
   public constructor(){
 
-    let tweet1 = new Tweet(new Date, "hola tweeter", "Juan", 20, [], [], []);
-    let tweet2 = new Tweet(new Date, "jaja eso me dolio", "Raul", 12, [], [], []);
-    let tweet3 = new Tweet(new Date, "adios a todo el mundo, me voy", "Maria", 4, [], [], []);
-    let tweet4 = new Tweet(new Date, "pam pam pam , dijo Daddy Wisin & Yandel", "Pedro", 65, [], [], []);
-
-    this.tweets.push(tweet1);
-    this.tweets.push(tweet2);
-    this.tweets.push(tweet3);
-    this.tweets.push(tweet4);
-
   }
 }
 
