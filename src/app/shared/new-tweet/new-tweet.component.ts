@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Tweet } from '../model/tweet';
+import { User } from '../model/user';
 import { TweetService } from '../tweetService/tweet.service';
+import { UsuarioService } from '../usuarioService/usuario.service';
 
 @Component({
   selector: 'new-tweet',
@@ -13,7 +15,7 @@ export class NewTweetComponent {
   //objeto formulario que se usara en el html (two-way data-binding)
   public form: FormGroup;
 
-  public constructor(public formBuilder: FormBuilder, public tweetService: TweetService){
+  public constructor(public formBuilder: FormBuilder, public tweetService: TweetService, public userService: UsuarioService){
 
     //instanciamos el formulario alimentandolo 
     //de lo que tengo dentro del formulario html
@@ -39,9 +41,16 @@ export class NewTweetComponent {
     {
       //Obtengo el valor del campo tweetcontent dentro del formulario
       let tweetcontent = this.form.get('tweetcontent')?.value;
-      let tweet = new Tweet(new Date, tweetcontent, "Pedro", 65, [], [], [])
+      let author: User | null = this.userService.getUser("@juanPdr");
+
+      if(author != null)
+      {
+        let tweet = new Tweet(new Date, tweetcontent, author, 65, [], [], [])
       
-      this.tweetService.publishTweet(tweet);
+        this.tweetService.publishTweet(tweet);
+
+        this.form.get('tweetcontent')?.setValue("");
+      }
     }
   }
 
