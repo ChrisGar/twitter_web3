@@ -7,6 +7,7 @@ import { TweetComponent } from './shared/tweetComponent/tweet.component';
 import { MainFeedComponent } from './main-feed/main-feed.component';
 import { ProfileComponent } from './profile/profile.component';
 import { NewTweetComponent } from './shared/new-tweet/new-tweet.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,9 @@ import { NewTweetComponent } from './shared/new-tweet/new-tweet.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

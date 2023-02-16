@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 import { Tweet } from '../model/tweet';
 
 @Injectable({
@@ -6,21 +7,46 @@ import { Tweet } from '../model/tweet';
 })
 export class TweetService {
 
-  constructor() { }
+  protected tweets: Tweet[] = [];
 
-  public getTweets(): Tweet[]
+  //Subject = observable que permite sincronizar las peticiones
+  //del lado del servidor y enviarlas a un observer (.suscribe)
+  public newTweets$ = new Subject();
+
+  public constructor()
   {
-    let tweets: Tweet[] = [];
+    
     let tweet1 = new Tweet(new Date, "hola tweeter", "Juan", 20, [], [], []);
     let tweet2 = new Tweet(new Date, "jaja eso me dolio", "Raul", 12, [], [], []);
     let tweet3 = new Tweet(new Date, "adios a todo el mundo, me voy", "Maria", 4, [], [], []);
-    let tweet4 = new Tweet(new Date, "pam pam pam , dijo Daddy Wisin & Yandel", "Pedro", 65, [], [], []);
+    let tweet4 = new Tweet(new Date, "pam pam pam , dijo Wisin & Yandel", "Pedro", 65, [], [], []);
 
-    tweets.push(tweet1);
-    tweets.push(tweet2);
-    tweets.push(tweet3);
-    tweets.push(tweet4);
+    this.tweets.push(tweet1);
+    this.tweets.push(tweet2);
+    this.tweets.push(tweet3);
+    this.tweets.push(tweet4);
 
-    return tweets;
+    this.tweets;
+  }
+
+  public getTweets(): Tweet[]
+  {
+    let list_tweets: Tweet[] = [];
+
+    this.tweets.forEach(
+      tweet => {
+        list_tweets.push(tweet)
+      });
+    return list_tweets;
+  }
+
+  public publishTweet(tweet: Tweet)
+  {
+    //obtiene el ultimo elemento de la pila
+    //y lo devuelve como primer elemento
+    this.tweets.unshift(tweet);
+    
+    //Emito y/o notifico el evento que tengo nuevos tweets
+    this.newTweets$.next(true);
   }
 }
