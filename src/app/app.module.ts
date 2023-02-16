@@ -6,13 +6,15 @@ import { AppComponent } from './app.component';
 import { TweetComponent } from './shared/tweetComponent/tweet.component';
 import { MainFeedComponent } from './main-feed/main-feed.component';
 import { ProfileComponent } from './profile/profile.component';
+import { NewTweetComponent } from './shared/new-tweet/new-tweet.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TweetComponent,
     MainFeedComponent,
-    ProfileComponent
+    ProfileComponent,
+    NewTweetComponent
   ],
   imports: [
     BrowserModule,
