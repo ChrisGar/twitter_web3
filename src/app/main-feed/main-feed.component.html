@@ -1,11 +1,10 @@
-<!-- Main column -->
 
-<!-- New Tweet section -->
-<div class="border-b border-gray-200 dark:border-gray-600 w-full px-4 py-3">
-    <h2 class="font-bold dark:text-white text-xl">Home</h2>
-    <new-tweet></new-tweet>
-  </div>
+    <!-- New Tweet section -->
+    <div class="border-b border-gray-200 dark:border-gray-600 w-full px-4 py-3">
+        <h2 class="font-bold dark:text-white text-xl">Home</h2>
+        <newtweet></newtweet>
+    </div>
+    <!-- Tweets -->
+    <tweet [tweet]="item" *ngFor="let item of tweets"></tweet>
 
-  <!-- Tweets -->
-  <tweet [tweet_content]="tweet" *ngFor="let tweet of tweets"></tweet>
 

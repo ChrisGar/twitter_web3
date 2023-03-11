@@ -1,7 +1,7 @@
-import { Component, OnDestroy, Output } from '@angular/core';
-import { Subscription } from 'rxjs';
-import { Tweet } from '../shared/model/tweet';
-import { TweetService } from '../shared/tweetService/tweet.service';
+import {Component, OnDestroy} from '@angular/core';
+import {Tweet} from "../share/model/tweet";
+import {TweetService} from "../share/tweetservice/tweet.service";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-main-feed',
@@ -10,27 +10,27 @@ import { TweetService } from '../shared/tweetService/tweet.service';
 })
 export class MainFeedComponent implements OnDestroy {
 
-  public tweets: Tweet[] = [];
+  public tweets: Tweet[] =[];
+  public subscriptions: Subscription[] = new Array<Subscription>();
 
-  //Guardamos todas las suscripciones que se hagan
-  public suscription: Subscription = new Subscription;
+  public subscription: Subscription = new Subscription();
 
-  public constructor(public tweetService: TweetService){
+  public constructor(public tweetService: TweetService) {
 
-    this.tweets = tweetService.getTweets();
+    this.tweetService.getTweets().then((tweets: Tweet[]) => {
+        this.tweets = tweets;
+    });
 
-    this.suscription = 
-      this.tweetService.newTweets$.subscribe(() => {
-      this.tweets = this.tweetService.getTweets();
-    })
+    this.subscription = this.tweetService.newTweets$.subscribe(async () => {
+      this.tweets = await this.tweetService.getTweets();
+    });
+
   }
 
-  //se llama cada vez que se destruye el componente
-  public ngOnDestroy()
-  {
-    //Me desuscribo para que no se suscriba 
-    //cada vez que se genera el componente
-    this.suscription.unsubscribe();
+  public ngOnDestroy() {
+    //this.subscriptions.forEach(subscription => { subscription.unsubscribe(); });
+    this.subscription.unsubscribe();
   }
+
 
 }

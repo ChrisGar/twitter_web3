@@ -3,11 +3,17 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { TweetComponent } from './shared/tweetComponent/tweet.component';
+import {TweetComponent} from "./share/tweetcomponent/tweet.componet";
 import { MainFeedComponent } from './main-feed/main-feed.component';
 import { ProfileComponent } from './profile/profile.component';
-import { NewTweetComponent } from './shared/new-tweet/new-tweet.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {TweetService} from "./share/tweetservice/tweet.service";
+import {NewTweetComponent} from "./share/newtweet/newtweet.component";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {UserService} from "./share/tweetservice/user.service";
+import {Web3Service} from "./share/web3service/web3.service";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MaterialModule } from './share/material.modules';
+import { DialogComponent } from './share/dialog/dialog.component';
 
 @NgModule({
   declarations: [
@@ -15,15 +21,22 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     TweetComponent,
     MainFeedComponent,
     ProfileComponent,
-    NewTweetComponent
+    NewTweetComponent,
+    DialogComponent,
   ],
   imports: [
+    FormsModule,
+    ReactiveFormsModule,
     BrowserModule,
     AppRoutingModule,
-    FormsModule,
-    ReactiveFormsModule
+    BrowserAnimationsModule,
+    MaterialModule
   ],
-  providers: [],
+  providers: [
+    TweetService,
+    UserService,
+    Web3Service,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

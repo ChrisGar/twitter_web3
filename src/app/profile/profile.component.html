@@ -1,1 +1,39 @@
-<p>profile works!</p>
+<div *ngIf="tweets.length > 0" style="margin-left: 5mm;">
+    <div class="pt-4 flex">
+        <div class="shrink-0">
+            <img class="w-28 h-28 rounded-full" [src]="tweets[0].author?.avatar">
+        </div>
+        <div class="w-full pl-1">
+            <a (click)="openDialog()" class="relative w-28 h-9 rounded-full flex items-center justify-center hover:bg-slate-200 text-black" href="javascript:void(null);" 
+            style="margin-top: 18mm; float: right; margin-right: 4mm; font-size: 16px; font-weight: bold; border: 1px solid silver;">
+                Editar Perfil
+            </a>
+        </div>
+    </div>
+
+    <!-- Description -->
+    <div class="flex-grow">
+        <p class="font-bold dark:text-white text-lg" style="margin-bottom: 0px !important;">{{tweets[0].author?.name}}</p>
+        <p class="text-gray-600 dark:text-gray-400 text-sm" style="margin-bottom: 4mm;">@{{tweets[0].author?.name}}</p>
+    </div>
+    <div class="w-14 shrink-0">
+        <p class="text-[15px] dark:text-white">{{tweets[0].author?.bio}}</p>
+    </div>
+</div>
+
+<mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
+<mat-tab label="Tweets">
+    <tweet [tweet]="item" *ngFor="let item of tweets"></tweet>
+</mat-tab>
+<mat-tab label="Respuestas">
+    Aún no tienes retweets
+</mat-tab>
+<mat-tab label="Multimedia">
+    Aún no tienes contenido multimedia
+</mat-tab>
+<mat-tab label="Me gusta">
+    Aún no tienes Likes
+</mat-tab>
+</mat-tab-group>
+  
+
